@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 flask = "*"
+python-dotenv = "*"
+requests = "*"
+pandas = "*"
+local-structure = {file = ".", editable = true}
 
 [dev-packages]
 
