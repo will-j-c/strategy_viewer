@@ -1,5 +1,6 @@
 from time import sleep
 import pandas as pd
+import json
 from api.data.data import ExternalData
 
 class PairsData:
@@ -13,8 +14,8 @@ class PairsData:
         pairs_df['spread'] = pairs_df[f'close{pair_1_symbol}'] - beta * pairs_df[f'close{pair_2_symbol}']
         pairs_df['z'] = (pairs_df['spread'] - pairs_df['spread'].rolling(lag).mean()) / pairs_df['spread'].rolling(lag).std()
         pairs_df.dropna(inplace=True)
-        pairs_df['time'] = pairs_df.index
-        pairs_df = pairs_df[['spread', 'z']]
+        pairs_df['time'] = pairs_df.index.strftime('%Y-%m-%d %H:%M:%S')
+        pairs_df = pairs_df[['time', 'spread', 'z']]
         pairs_df['cross_up_sigma'] = ((pairs_df['z'] > high_sigma) & (pairs_df['z'] > pairs_df['z'].shift(1)) & (pairs_df['z'].shift(1) < high_sigma))
         pairs_df['cross_down_sigma'] = ((pairs_df['z'] < low_sigma) & (pairs_df['z'] < pairs_df['z'].shift(1)) & (pairs_df['z'].shift(1) > low_sigma))
         pairs_df['cross_up_zero'] = ((pairs_df['z'] > 0) & (pairs_df['z'] > pairs_df['z'].shift(1)) & (pairs_df['z'].shift(1) < 0) & (pairs_df['z'].shift(1) < 0))

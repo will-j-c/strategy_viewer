@@ -7,4 +7,4 @@ from api.pairs.pairs_data import PairsData
 def get_pairs_data(pair_1, pair_2, interval, beta, lag, high_sigma, low_sigma):
     print(pair_1, pair_2, interval, beta, lag, high_sigma, low_sigma)
     json = PairsData.create_pairs_json(pair_1, pair_2, interval, beta, lag, high_sigma, -low_sigma)
-    return f"<p>{json}</p>"
+    return json

@@ -9,6 +9,7 @@ python-dotenv = "*"
 requests = "*"
 pandas = "*"
 local-structure = {file = ".", editable = true}
+flask-cors = "*"
 
 [dev-packages]
 
